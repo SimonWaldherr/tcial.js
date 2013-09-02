@@ -7,7 +7,7 @@
  * http://opensource.org/licenses/MIT
  *
  * Github:  https://github.com/SimonWaldherr/tcial.js
- * Version: 0.1.0
+ * Version: 0.1.1
  */
 
 /*jslint browser: true, plusplus: true, unparam: true, indent: 2 */
@@ -17,6 +17,22 @@ var tcial = {};
 tcial = {
   esc: window.escape !== undefined ? window.escape : encodeURIComponent,
   unesc: window.unescape !== undefined ? window.unescape : decodeURIComponent,
+  htmldecode: function (string) {
+    "use strict";
+    var div = document.createElement('div');
+    div.innerHTML = string;
+    string = div.innerText || div.textContent;
+    div = undefined;
+    return string;
+  },
+  htmlencode: function (string) {
+    "use strict";
+    var div = document.createElement('div');
+    div.appendChild(document.createTextNode(string));
+    string = div.innerHTML;
+    div = undefined;
+    return string;
+  },
   get: function (sKey) {
     "use strict";
     var retvalue;

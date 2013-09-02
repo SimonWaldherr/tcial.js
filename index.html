@@ -1,44 +1,56 @@
-<html>
+<!DOCTYPE html><html>
 <head>
   <meta charset="utf-8" />
   <title>The Cookie is real</title>
   <link href="style.css" rel="stylesheet" type="text/css" />
+  <link href="http://selfcss.org/baf/css/baf.css" media="screen" rel="stylesheet" type="text/css"/>
+  <link href="http://selfcss.org/baf/css/icomoon.css" media="screen" rel="stylesheet" type="text/css"/>
+  <link rel="stylesheet" href="http://shownotes.github.io/tinyOSF.js/style.css" type="text/css" media="screen">
+  <style type="text/css" media="screen">
+    .baf.grey.dimension {top: -4px;}
+    .baf-icomoon.big {margin: 1px 0px;}
+    h1 a, h1 a:visited {text-decoration: none; color: black;}
+    table input {width: 100%;}
+    td {padding: 5px;}
+    tr:nth-child(even) {background: #CCC;}
+    tr:nth-child(odd) {background: #FFF;}
+  </style>
+</head>
+<body>
+  <div id="header">
+    <h1><a href="https://github.com/SimonWaldherr/tcial.js">tcial.js</a></h1>
+    <h2> the cake is a lie, but the cookie isn&#39;t <i style="font-weight: 100;">version 0.1.0</i></h2>
+  </div>
+  <div id="parsedBox">
+    <div id="parsed">
+      <div id="list"></div>
+    </div>
+    <div id="footer" style="text-align:right;">&nbsp;<span>© 2013 <a href="http://simon.waldherr.eu/">simon.waldherr.eu</a></span></div>
+  </div>
+  <script type="text/javascript" src="tcial.js"></script>
   <script type="text/javascript" charset="utf-8">
     function gid(id) {
       return document.getElementById(id);
     }
-    
+
+    function removeCoo(sKey) {
+      tcial.removeItem(sKey);
+      listCookies();
+    }
+
     function listCookies () {
-      var i = 0, cookieArray = tcial.listItems(), output = "";
+      var i = 0, cookieArray = tcial.listItems(), output;
+      output = "<table style='width:100%;'><tr style='text-align:center; font-weight: 700;'><td>Name</td><td>Value</td><td></td></tr>";
       for(i = 0; i < cookieArray.length; i++) {
-        output += cookieArray[i].key + ': ' + cookieArray[i].value + '\n<br/>';
+        output += '<tr><td>' + cookieArray[i].key + '</td><td>' + cookieArray[i].value + '</td><td style="background:white; width:50px;"><a class="baf grey dimension" onclick="removeCoo(\'' + cookieArray[i].key + '\');"><span class="baf-icomoon big" aria-hidden="true" data-icon="&#xe060;"></span></a></td></tr>\n';
       }
+      output += '<tr><td><input type="text" name="cookieName" value="" id="cookieName" /></td><td><input type="text" name="cookieValue" value="" id="cookieValue" /></td><td style="background:white; width:50px;"><a class="baf grey dimension" onclick="tcial.setItem(gid(\'cookieName\').value, gid(\'cookieValue\').value); listCookies();"><span class="baf-icomoon big" aria-hidden="true" data-icon="&#xe005;"></span></a></td></tr></table>';
       gid('list').innerHTML = output;
     }
-    
+
     window.onload = function () {
       listCookies();
     };
   </script>
-</head>
-<body>
-  <div id="get">
-    <label for="getCookie">Cookie name: </label><input type="text" name="getCookie" value="" id="getCookie" /><input type="button" value="get Cookie" onclick="gid('getoutput').innerHTML = tcial.getItem(gid('getCookie').value); listCookies();" />
-    <p id="getoutput"></p>
-  </div>
-  <hr/>
-  <div id="set">
-    <label for="setCookie">Cookie name: </label><input type="text" name="cookieName" value="" id="cookieName" />
-      <br/>Cookie value: </label><input type="text" name="cookieValue" value="" id="cookieValue" /><input type="button" value="set Cookie" onclick="tcial.setItem(gid('cookieName').value, gid('cookieValue').value); listCookies();" />
-  </div>
-  <hr/>
-  <div id="remove">
-    <label for="removeCookie">Cookie name: </label><input type="text" name="removeCookie" value="" id="removeCookie" /><input type="button" value="remove Cookie" onclick="tcial.removeItem(gid('removeCookie').value); listCookies();" />
-  </div>
-  <hr/>
-  <div id="list">
-    
-  </div>
-  <script type="text/javascript" src="tcial.js"></script>
 </body>
 </html>
