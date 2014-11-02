@@ -7,7 +7,7 @@
  * http://opensource.org/licenses/MIT
  *
  * Github:  https://github.com/SimonWaldherr/tcial.js
- * Version: 0.1.2
+ * Version: 0.1.3
  */
 
 /*jslint browser: true, plusplus: true, unparam: true, indent: 2 */
